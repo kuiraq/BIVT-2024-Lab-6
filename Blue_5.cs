@@ -82,7 +82,6 @@ namespace Lab_6
                                     total_points += 1;
                                     break;
                                 default:
-                                    total_points += 0;
                                     break;
 
                             }
@@ -136,15 +135,17 @@ namespace Lab_6
 
                 public static void Sort(Team[] teams)
                 {
-                    teams = teams.OrderBy(t => t.TopPlace).ToArray();
+                if (teams == null) return;
+                Array.Sort(teams, (a, b) =>
+                {
+                    int scoreComparison = b.SummaryScore.CompareTo(a.SummaryScore);
+                    return scoreComparison != 0 ? scoreComparison : a.TopPlace.CompareTo(b.TopPlace);
+                });
                 }
 
-                public void Print()
+            public void Print()
                 {
-                    for (int i = 0; i < _sportsmen.Length; i++)
-                    {
-                        Console.WriteLine($"{Name} {SummaryScore} {TopPlace}");
-                    }
+                    Console.WriteLine($"Команда: {Name}, Их балл: {SummaryScore}, Лучшее место: {TopPlace}");
                 }
             }
 

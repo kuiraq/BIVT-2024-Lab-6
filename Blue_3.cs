@@ -20,8 +20,8 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_minutes == null) return default(int[]);
-                    if (_minutes.Length == 0) return default(int[]);
+                    if (_minutes == null) return new int[0];
+                    if (_minutes.Length == 0) return new int[0];
                     int[] minutes = new int[_minutes.Length];
                     Array.Copy(_minutes, minutes, minutes.Length);
                     return minutes;
@@ -31,6 +31,7 @@ namespace Lab_6
             { 
                 get
                 {
+                    if (_minutes == null || _minutes.Length == 0) return 0;
                     int total = 0;
                     for (int i = 0; i < _minutes.Length; i++)
                     {
@@ -43,7 +44,7 @@ namespace Lab_6
             {
                 get
                 {
-
+                    if (_minutes == null || _minutes.Length == 0) return false;
                     foreach (int i in _minutes)
                     {
                         if (i == 10)

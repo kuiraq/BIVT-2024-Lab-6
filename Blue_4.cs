@@ -19,7 +19,7 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_scores == null) return default(int[]);
+                    if (_scores == null) return null;
                     int[] scores = new int[_scores.Length];
                     Array.Copy(_scores, scores, scores.Length);
                     return scores;
@@ -47,16 +47,9 @@ namespace Lab_6
 
             public void PlayMatch(int result)
             {
-                if (_scores == null || _scores.Length==0)
-                {
-                    _scores = new int[1] {result};
-                }
-                else
-                {
-                    Array.Resize(ref _scores, _scores.Length + 1);
-                    _scores[_scores.Length - 1] = result;
-                }
-                
+                Array.Resize(ref _scores, _scores.Length + 1);
+                _scores[_scores.Length - 1] = result;
+
             }
 
             public void Print()
@@ -77,6 +70,7 @@ namespace Lab_6
             {
                 get
                 {
+                    if (_teams == null) return new Team[0];
                     Team[] teams = new Team[_teams.Length];
                     Array.Copy(_teams, teams, teams.Length);
                     return teams;
@@ -107,6 +101,7 @@ namespace Lab_6
             }
             public  void Sort()
             {
+                if (_teams == null) return;
                 _teams = _teams.OrderByDescending(t => t.TotalScore).ToArray();
             }
             public static Group Merge(Group group1, Group group2, int size)
@@ -149,7 +144,10 @@ namespace Lab_6
                 Console.WriteLine($"Группа: {_name}");
                 foreach (var team in _teams)
                 {
-                    team.Print();
+                    if (team.Name != null)
+                    {
+                        team.Print();
+                    }
                 }
             }
 

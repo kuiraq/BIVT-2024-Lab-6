@@ -31,6 +31,7 @@ namespace Lab_6
             {
                 get
                 {
+                    if (_marks == null || _marks.GetLength(0) == 0 || _marks.GetLength(1) == 0) return 0;
                     int total = 0;
                     for (int i = 0; i < _marks.GetLength(0); i++)
                     {
@@ -57,7 +58,7 @@ namespace Lab_6
 
             public void Jump(int[] result)
             {
-
+                if (result == null || _marks == null || result.Length == 0 || _marks.GetLength(0) < 2 || _marks.GetLength(1) < 5) return;
                 for (int i = 0; i < _marks.GetLength(0); i++)
                 {
                     if (_marks[i, 0] == 0)
@@ -73,6 +74,7 @@ namespace Lab_6
 
             public static void Sort(Participant[] array)
             {
+                if (array == null) return;
                 Array.Sort(array, (a,b) => b.TotalScore.CompareTo(a.TotalScore));
             }
             public void Print()
