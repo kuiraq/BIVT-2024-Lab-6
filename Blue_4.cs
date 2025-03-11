@@ -71,9 +71,8 @@ namespace Lab_6
                 get
                 {
                     if (_teams == null) return new Team[0];
-                    Team[] teams = new Team[_teams.Length];
-                    Array.Copy(_teams, teams, teams.Length);
-                    return teams;
+                   
+                    return _teams;
                 }
             }
 
@@ -87,7 +86,7 @@ namespace Lab_6
             public void Add(Team team)
             {
                 if (_teams == null || _teams.Length == 0) return;
-                if (index >= _teams.Length) return;
+                if (index >= 12) return;
                 _teams[index] = team;
                 index++;
             }
@@ -99,10 +98,21 @@ namespace Lab_6
                     Add(team);  
                 }
             }
-            public  void Sort()
+            public void Sort()
             {
-                if (_teams == null) return;
-                _teams = _teams.OrderByDescending(t => t.TotalScore).ToArray();
+                if (_teams == null || index == 0) return;
+                for (int i = 0; i < index - 1; i++)
+                {
+                    for (int j = 0; j < index - i - 1; j++)
+                    {
+                        if (_teams[j].TotalScore < _teams[j + 1].TotalScore)
+                        {
+                            var temp = _teams[j];
+                            _teams[j] = _teams[j + 1];
+                            _teams[j + 1] = temp;
+                        }
+                    }
+                }
             }
             public static Group Merge(Group group1, Group group2, int size)
             {
@@ -142,12 +152,9 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine($"Группа: {_name}");
-                foreach (var team in _teams)
+                for (int i = 0; i < index; i++)
                 {
-                    if (team.Name != null)
-                    {
-                        team.Print();
-                    }
+                    _teams[i].Print();
                 }
             }
 

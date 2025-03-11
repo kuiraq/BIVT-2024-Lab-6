@@ -13,6 +13,7 @@ namespace Lab_6
             private string _name;
             private string _surname;
             private int[] _minutes;
+            private int total;
 
             public string Name { get { return _name; } }
             public string Surname {  get { return _surname; } }
@@ -20,8 +21,8 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_minutes == null) return new int[0];
-                    if (_minutes.Length == 0) return new int[0];
+                    if (_minutes == null) return null;
+                    if (_minutes.Length == 0) return null;
                     int[] minutes = new int[_minutes.Length];
                     Array.Copy(_minutes, minutes, minutes.Length);
                     return minutes;
@@ -49,10 +50,10 @@ namespace Lab_6
                     {
                         if (i == 10)
                         {
-                            return false;
+                            return true;
                         }
                     }
-                    return true;
+                    return false;
                 }
             }
 
@@ -61,12 +62,13 @@ namespace Lab_6
                 _name = name;
                 _surname = surname;
                 _minutes = new int[0];
+                total = 0;
                 
             }
 
             public void PlayMatch(int time)
             {
-                if (_minutes == null) return;
+                
                 Array.Resize(ref _minutes, _minutes.Length + 1);
                 _minutes[_minutes.Length-1] = time;
             }

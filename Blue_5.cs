@@ -135,15 +135,25 @@ namespace Lab_6
 
                 public static void Sort(Team[] teams)
                 {
-                if (teams == null) return;
-                Array.Sort(teams, (a, b) =>
-                {
-                    int scoreComparison = b.SummaryScore.CompareTo(a.SummaryScore);
-                    return scoreComparison != 0 ? scoreComparison : a.TopPlace.CompareTo(b.TopPlace);
-                });
+                    if (teams == null) return;
+
+                    for (int i = 0; i < teams.Length - 1; i++)
+                    {
+                        for (int j = 0; j < teams.Length - i - 1; j++)
+                        {
+                            if (teams[j].SummaryScore < teams[j + 1].SummaryScore ||
+                                (teams[j].SummaryScore == teams[j + 1].SummaryScore && teams[j].TopPlace > teams[j + 1].TopPlace))
+                            {
+                                var temp = teams[j];
+                                teams[j] = teams[j + 1];
+                                teams[j + 1] = temp;
+                            }
+                        }
+                    }
+
                 }
 
-            public void Print()
+                public void Print()
                 {
                     Console.WriteLine($"Команда: {Name}, Их балл: {SummaryScore}, Лучшее место: {TopPlace}");
                 }

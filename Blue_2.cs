@@ -13,16 +13,24 @@ namespace Lab_6
             private string _name;
             private string _surname;
             private int[,] _marks;
+            private int total;
 
             public string Name { get { return _name; } }
             public string Surname => _surname;
+
             public int[,] Marks
             {
                 get
                 {
-                    if (_marks == null || _marks.GetLength(0) != _marks.GetLength(1)) return default(int[,]);
+                    if (_marks == null || _marks.GetLength(0) != 2 || _marks.GetLength(1) != 5) return null;
                     int[,] marks = new int[_marks.GetLength(0), _marks.GetLength(1)];
-                    Array.Copy(_marks, marks, _marks.GetLength(0));
+                    for (int i = 0; i < 2; i++)
+                    {
+                        for (int j = 0; j < 5; j++)
+                        {
+                            marks[i, j] = _marks[i, j];
+                        }
+                    }
                     return marks;
                 }
             }
@@ -48,12 +56,8 @@ namespace Lab_6
             {
                 _name = name;
                 _surname = surname;
-                _marks = new int[,]
-                {
-                    {0,0,0,0,0 },
-                    {0,0,0,0,0 }
-                };
-
+                _marks = new int[2, 5];
+                total = 0;
             }
 
             public void Jump(int[] result)
@@ -74,7 +78,7 @@ namespace Lab_6
 
             public static void Sort(Participant[] array)
             {
-                if (array == null) return;
+                if (array == null || array.Length == 0) return;
                 Array.Sort(array, (a,b) => b.TotalScore.CompareTo(a.TotalScore));
             }
             public void Print()
