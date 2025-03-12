@@ -62,14 +62,24 @@ namespace Lab_6
 
             public void Jump(int[] result)
             {
-                if (result == null || _marks == null || result.Length == 0 || _marks.GetLength(0) < 2 || _marks.GetLength(1) < 5) return;
+                if (result == null || _marks == null || result.Length == 0 || _marks.GetLength(0) != 2 || _marks.GetLength(1) != 5 || result.Length != 5) return;
                 for (int i = 0; i < _marks.GetLength(0); i++)
                 {
-                    if (_marks[i, 0] == 0)
+                    bool isEmpty = true;
+
+                    for (int j = 0; j < _marks.GetLength(1); j++)
+                    {
+                        if (_marks[i, j] != 0)
+                        {
+                            isEmpty = false;
+                            break;
+                        }
+                    }
+                    if (isEmpty)
                     {
                         for (int j = 0; j < _marks.GetLength(1); j++)
                         {
-                            _marks[i, j] = result[j];
+                            _marks[i,j] = result[j];
                         }
                         break;
                     }

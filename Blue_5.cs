@@ -50,9 +50,9 @@ namespace Lab_6
                     get
                     {
                         if (_sportsmen == null) return null;
-                        Sportsman[] sportsmen = new Sportsman[_sportsmen.Length];
-                        Array.Copy(_sportsmen, sportsmen, _sportsmen.Length);
-                        return sportsmen;
+                        Sportsman[] copy = new Sportsman[index];
+                        Array.Copy(_sportsmen, copy, index);
+                        return copy;
                     }
                 }
 
@@ -62,7 +62,7 @@ namespace Lab_6
                     {
                         if (_sportsmen == null || _sportsmen.Length == 0) return 0;
                         int total_points = 0;
-                        for (int i = 0; i < _sportsmen.Length; i++)
+                        for (int i = 0; i < index; i++)
                         {
                             switch (_sportsmen[i].Place)
                             {
@@ -96,9 +96,9 @@ namespace Lab_6
                 {
                     get
                     {
-                        if (_sportsmen == null || _sportsmen.Length == 0) return 0;
+                        if (_sportsmen == null || index == 0) return 0;
                         int min_place = 18;
-                        for (int i = 0; i < _sportsmen.Length; i++)
+                        for (int i = 0; i < index; i++)
                         {
                             if (_sportsmen[i].Place > 0 && _sportsmen[i].Place < min_place)
                             {
@@ -120,12 +120,13 @@ namespace Lab_6
                 public void Add(Sportsman sportsman)
                 {
                     if (_sportsmen == null || _sportsmen.Length == 0) return;
-                    if (index >= _sportsmen.Length) return;
+                    if (index >= 6) return;
                     _sportsmen[index] = sportsman;
                     index++;
                 }
                 public void Add(Sportsman[] sportsmanchik)
                 {
+                    if (sportsmanchik == null || sportsmanchik.Length == 0) return;
                     if (_sportsmen == null || _sportsmen.Length == 0) return;
                     foreach (var sportsman in sportsmanchik)
                     {

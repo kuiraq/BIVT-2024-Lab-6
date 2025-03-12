@@ -21,7 +21,7 @@ namespace Lab_6
             {
                 get
                 {
-                    if (_minutes == null) return null;
+                    if (_minutes == null) return new int[0];
                     if (_minutes.Length == 0) return null;
                     int[] minutes = new int[_minutes.Length];
                     Array.Copy(_minutes, minutes, minutes.Length);

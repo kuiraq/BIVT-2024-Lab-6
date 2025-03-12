@@ -66,15 +66,8 @@ namespace Lab_6
             private int index;
 
             public string Name { get { return _name; } }
-            public Team[] Teams
-            {
-                get
-                {
-                    if (_teams == null) return new Team[0];
-                   
-                    return _teams;
-                }
-            }
+            public Team[] Teams {  get { return _teams; } }
+            
 
             public Group(string name)
             {
@@ -85,14 +78,14 @@ namespace Lab_6
 
             public void Add(Team team)
             {
-                if (_teams == null || _teams.Length == 0) return;
+                
                 if (index >= 12) return;
                 _teams[index] = team;
                 index++;
             }
             public void Add(Team[] teamss)
             {
-                if (teamss == null || _teams.Length == 0) return;
+                if (teamss == null) return;
                 foreach (var team in teamss)
                 {
                     Add(team);  
@@ -116,7 +109,7 @@ namespace Lab_6
             }
             public static Group Merge(Group group1, Group group2, int size)
             {
-                if (size <= 0) return default(Group);
+                if (size <= 0) return new Group("Финалисты");
                 Group finalists = new Group("Финалисты");
 
 
