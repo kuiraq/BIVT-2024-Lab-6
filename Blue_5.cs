@@ -42,6 +42,7 @@ namespace Lab_6
         {
             private string _name;
             private Sportsman[] _sportsmen;
+            private int count;
 
             public string Name { get { return _name; } }
             public Sportsman[] Sportsmen
@@ -49,9 +50,10 @@ namespace Lab_6
                 get
                 {
                     if (_sportsmen == null) return null;
-                    Sportsman[] copy = new Sportsman[_sportsmen.Length];
+                    /*Sportsman[] copy = new Sportsman[_sportsmen.Length];
                     Array.Copy(_sportsmen, copy, _sportsmen.Length);
-                    return copy;
+                    return copy;*/
+                    return _sportsmen;
                 }
             }
 
@@ -110,21 +112,16 @@ namespace Lab_6
             {
                 _name = name;
                 _sportsmen = new Sportsman[6];
+                count = 0;
             }
 
                 
             public void Add(Sportsman sportsman)
             {
                 if (_sportsmen == null || _sportsmen.Length == 0) return;
-                for (int i = 0; i < _sportsmen.Length; i++)
-                {
-                    if (_sportsmen[i].Name == null)
-                    {
-                        _sportsmen[i] = sportsman;
-                        break;
-                    }
-
-                }
+                if (count >= _sportsmen.Length) return;
+                _sportsmen[count] = sportsman;
+                count++;
 
             }
             public void Add(Sportsman[] sportsmanchik)
@@ -137,7 +134,7 @@ namespace Lab_6
                 }
             }
 
-            public static void Sort(Team[] teams)
+            public static void Sort(Team[] teams)   
             {
                 if (teams == null) return;
 
